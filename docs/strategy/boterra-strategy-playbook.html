@@ -1,0 +1,487 @@
+<title>Boterra Strategy Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
+<style>
+/* Layout: a working strategy document. Sticky contents rail on wide screens, one reading column, data in tables. */
+:root {
+  --bg: #F3F6F4;
+  --surface: #FFFFFF;
+  --surface-2: #E7EEEA;
+  --fg: #142029;
+  --muted: #55636D;
+  --line: #D5DFDA;
+  --accent: #0B7A5C;
+  --accent-soft: #D7F0E6;
+  --gold: #9A6A08;
+  --gold-soft: #FBEFD2;
+  --blue: #1D5F94;
+  --rust: #A34A12;
+  --violet: #5B3AA8;
+  --red: #A83226;
+  --teal: #0E6A62;
+  --map-line: #A9C7BA;
+  --font-display: "Sora", "Segoe UI", Arial, sans-serif;
+  --font-body: "DM Sans", "Segoe UI", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0C141C; --surface: #121D27; --surface-2: #1A2834; --fg: #E3ECE8; --muted: #9DB0AA; --line: #263644;
+    --accent: #3DD6A9; --accent-soft: #123A30; --gold: #F2B33D; --gold-soft: #3A2C0E; --blue: #7DB8EA; --rust: #F19A5E;
+    --violet: #B7A2F2; --red: #F08A7E; --teal: #63D1C4; --map-line: #2F4D45; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0C141C; --surface: #121D27; --surface-2: #1A2834; --fg: #E3ECE8; --muted: #9DB0AA; --line: #263644;
+  --accent: #3DD6A9; --accent-soft: #123A30; --gold: #F2B33D; --gold-soft: #3A2C0E; --blue: #7DB8EA; --rust: #F19A5E;
+  --violet: #B7A2F2; --red: #F08A7E; --teal: #63D1C4; --map-line: #2F4D45; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 16px/1.6 var(--font-body); margin: 0; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-inline: 20px; padding-block: 32px 80px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 48px; }
+@media (max-width: 900px) { .wrap { grid-template-columns: minmax(0, 1fr); gap: 24px; } .toc { display: none; } }
+.toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); align-self: start; display: flex; flex-direction: column; gap: 2px; font-size: 14px; }
+.toc a { color: var(--muted); text-decoration: none; padding: 6px 10px; border-radius: 8px; }
+.toc a:hover, .toc a:focus-visible { color: var(--fg); background: var(--surface-2); outline: none; }
+.toc .brand { font: 700 18px var(--font-display); color: var(--fg); padding: 0 10px 12px; }
+.toc .brand span { color: var(--accent); }
+main { min-width: 0; display: flex; flex-direction: column; gap: 56px; }
+header.hero { display: flex; flex-direction: column; gap: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+h1 { font: 700 clamp(30px, 4vw, 44px)/1.12 var(--font-display); margin: 0; text-wrap: balance; }
+h2 { font: 600 clamp(22px, 2.6vw, 28px)/1.2 var(--font-display); margin: 0; text-wrap: balance; }
+h3 { font: 600 17px/1.3 var(--font-display); margin: 0; }
+p { margin: 0; max-width: 72ch; }
+.lede { font-size: 18px; color: var(--muted); max-width: 70ch; }
+.meta { font-size: 14px; color: var(--muted); }
+section { display: flex; flex-direction: column; gap: 18px; scroll-margin-top: 24px; }
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.panel.strong { background: var(--accent-soft); border-color: transparent; }
+.panel ul, .list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
+.answer { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 4px 20px; padding: 14px 0; border-top: 1px solid var(--line); }
+.answer:last-child { border-bottom: 1px solid var(--line); }
+.answer dt { font-weight: 700; }
+.answer dd { margin: 0; color: var(--fg); }
+@media (max-width: 640px) { .answer { grid-template-columns: minmax(0, 1fr); } }
+.stat { font: 600 30px/1.1 var(--font-display); font-variant-numeric: tabular-nums; }
+.stat-label { color: var(--muted); font-size: 14px; }
+.table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 14.5px; }
+th, td { text-align: left; vertical-align: top; padding: 11px 14px; border-bottom: 1px solid var(--line); }
+th { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); background: var(--surface-2); font-weight: 700; }
+tr:last-child td { border-bottom: none; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pill { display: inline-block; font-size: 12px; font-weight: 700; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.w1 { background: var(--accent-soft); color: var(--accent); }
+.w2 { background: var(--gold-soft); color: var(--gold); }
+.w3 { background: var(--surface-2); color: var(--muted); }
+.statement { font: 600 clamp(19px, 2.2vw, 24px)/1.4 var(--font-display); padding: 24px 26px; border-radius: 16px; background: var(--accent-soft); max-width: none; }
+.timeline { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.phase { border-top: 4px solid var(--accent); }
+.phase.p2 { border-top-color: var(--blue); }
+.phase.p3 { border-top-color: var(--rust); }
+.note { font-size: 13px; color: var(--muted); }
+/* Mind map */
+.map-shell { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow-x: auto; }
+.map-tools { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px 16px 0; }
+.map-tools button { font: 600 13px var(--font-body); color: var(--fg); background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+.map-tools button[aria-pressed="false"] { opacity: .55; }
+.map-tools button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+#mindmap { display: block; width: 100%; min-width: 900px; height: auto; }
+#mindmap text { font-family: var(--font-body); fill: var(--fg); }
+#mindmap .leaf-text { font-size: 13px; }
+#mindmap .branch-text { font: 700 15px var(--font-display); fill: var(--surface); }
+#mindmap .center-text { font: 700 20px var(--font-display); fill: #FFFFFF; }
+#mindmap .center-sub { font-size: 12px; fill: #CFE7DE; }
+#mindmap .edge { stroke: var(--map-line); stroke-width: 2; fill: none; }
+#mindmap .leaf-dot { stroke: none; }
+#mindmap g.branch { cursor: pointer; }
+#mindmap g.branch:focus-visible rect { stroke: var(--fg); stroke-width: 3; }
+@media (prefers-reduced-motion: no-preference) { #mindmap .leafs { transition: opacity .25s ease; } }
+details.outline { padding: 0 16px 16px; }
+details.outline summary { cursor: pointer; font-weight: 600; font-size: 14px; color: var(--muted); padding: 10px 0; }
+.outline-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); font-size: 14px; }
+.outline-grid h3 { font-size: 14px; }
+a { color: var(--accent); }
+.sources li { font-size: 14px; color: var(--muted); }
+</style>
+
+<div class="wrap">
+  <nav class="toc" aria-label="Contents">
+    <div class="brand">Boterra <span>AI</span></div>
+    <a href="#summary">Answers at a glance</a>
+    <a href="#mindmap-section">Mind map</a>
+    <a href="#market">Market analysis</a>
+    <a href="#customers">Customers</a>
+    <a href="#payers">Who pays</a>
+    <a href="#where">Where it's used most</a>
+    <a href="#competitors">Competitors</a>
+    <a href="#opportunity">The opportunity</a>
+    <a href="#positioning">Positioning</a>
+    <a href="#leadership">Path to leadership</a>
+    <a href="#entry">Entry strategy</a>
+    <a href="#gtm">90-day GTM plan</a>
+    <a href="#risks">Risks</a>
+    <a href="#sources">Sources</a>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <p class="eyebrow">Strategy playbook · October 2026</p>
+      <h1>Boterra AI: who buys, where we win, and how we enter</h1>
+      <p class="lede">Market analysis, customer profiles, competitive research and the go-to-market plan for Boterra AI, the governed AI workforce for small and medium businesses. Figures come from public sources listed at the end. Ratings marked "assessment" are our judgement, to be tested in pilots.</p>
+    </header>
+
+    <section id="summary" aria-labelledby="summary-h">
+      <h2 id="summary-h">Answers at a glance</h2>
+      <dl>
+        <div class="answer"><dt>Main customers</dt><dd>Owner-operators of businesses with 6–20 staff (restaurants, retail, salons), growing professional firms with 5–50 staff (agencies, consultancies, clinics), and the "SME enablers" who serve hundreds of them (accountants, bank SME desks, telcos).</dd></div>
+        <div class="answer"><dt>Who pays</dt><dd>Owners pay subscriptions. Accountants and agencies pay for white-label seats. Banks, telcos and fintechs bundle Boterra into SME accounts. Governments and donors sponsor seats for SME cohorts. Franchises sign enterprise contracts.</dd></div>
+        <div class="answer"><dt>Where it's used most</dt><dd>Industries: professional services, retail and e-commerce, restaurants and hospitality first; clinics, logistics and trades next. Regions: Nigeria first, then Kenya and Ghana, then the UAE, Saudi Arabia and South Africa, then UK, US and India by vertical.</dd></div>
+        <div class="answer"><dt>Who leads today</dt><dd>Sintra ($12M ARR, 40,000 paying customers) and Symphony by Wix (launched 11 August 2026) lead SMB "AI employees". Lindy and Relevance AI lead agent builders. Salesforce and Microsoft lead enterprise agents.</dd></div>
+        <div class="answer"><dt>Where the opportunity is</dt><dd>Nobody offers a governed AI workforce for the whole business (finance, legal, compliance, HR) built for emerging markets. Owners want AI but don't trust it unsupervised and lack the skills to build agents.</dd></div>
+        <div class="answer"><dt>Entry strategy</dt><dd>Win Lagos and Abuja first through accountant partners, one bank or telco bundle and government SME programmes. Expand across Africa, pilot the Gulf, then enter the UK and US through vertical packs.</dd></div>
+      </dl>
+    </section>
+
+    <section id="mindmap-section" aria-labelledby="map-h">
+      <h2 id="map-h">Mind map of the solution</h2>
+      <p>Select a branch, or use the buttons, to show or hide its detail.</p>
+      <div class="map-shell">
+        <div class="map-tools" id="map-tools" role="group" aria-label="Show branches"></div>
+        <svg id="mindmap" viewBox="0 0 1200 840" role="img" aria-labelledby="map-title"><title id="map-title">Boterra AI mind map with six branches: product, customers, markets, revenue, moat and go-to-market</title></svg>
+        <details class="outline">
+          <summary>Read the mind map as a list</summary>
+          <div class="outline-grid" id="map-outline"></div>
+        </details>
+      </div>
+    </section>
+
+    <section id="market" aria-labelledby="market-h">
+      <h2 id="market-h">Market analysis</h2>
+      <div class="grid">
+        <div class="panel"><span class="stat">420–510M</span><span class="stat-label">MSMEs worldwide (IFC/McKinsey); 360–440M in emerging markets</span></div>
+        <div class="panel"><span class="stat">$10.9B</span><span class="stat-label">AI agents market in 2026, up from $7.6B in 2025</span></div>
+        <div class="panel"><span class="stat">$206.5B</span><span class="stat-label">Gartner's 2026 AI agent spending forecast, up from $86.4B</span></div>
+        <div class="panel"><span class="stat">17.4%</span><span class="stat-label">of small firms use AI, against 52% of large firms (OECD)</span></div>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Market</th><th>Businesses</th><th>Signal for Boterra</th></tr></thead>
+          <tbody>
+            <tr><td>Nigeria</td><td class="num">39.6M MSMEs</td><td>SMEDAN and Zoho are putting up to ₦20bn of software credits into 25,000 MSMEs: the state already pays for SME software.</td></tr>
+            <tr><td>United States</td><td class="num">36.2M small businesses</td><td>77% of SMBs use AI regularly, but only 17.7% have paid for an AI tool. 28% of SMBs spend $25–99 a month on AI.</td></tr>
+            <tr><td>India</td><td class="num">88.4M Udyam-registered</td><td>Rapid formalisation; very price-sensitive; best reached through partners later.</td></tr>
+            <tr><td>UAE</td><td class="num">10,000 SMEs in du's programme</td><td>A telco is training SMEs on agentic AI for free, a ready bundling partner.</td></tr>
+            <tr><td>Kenya</td><td class="num">National AI strategy</td><td>Government is positioning AI as the engine of MSME growth.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">SMEs make up about 90% of businesses, around 70% of employment and about 50% of global GDP (World Bank / IFC estimates). Nigeria's count is from the 2020 SMEDAN/NBS survey, the latest national census of MSMEs.</p>
+    </section>
+
+    <section id="customers" aria-labelledby="customers-h">
+      <h2 id="customers-h">Potential customers</h2>
+      <p>Composite profiles drawn from the market data. Each will be validated in the first pilots.</p>
+      <div class="grid">
+        <div class="panel">
+          <p class="eyebrow">Primary · volume</p>
+          <h3>The overloaded owner-operator</h3>
+          <ul>
+            <li><b>Who:</b> café, shop, salon or pharmacy owner, 6–20 staff, Lagos, Abuja, Nairobi or Accra.</li>
+            <li><b>Jobs to be done:</b> know where cash stands, stay on top of tax and licences, hire and roster staff, get more customers.</li>
+            <li><b>Triggers:</b> a missed filing or fine, a cash crunch, opening a second branch.</li>
+            <li><b>Objections:</b> "AI makes mistakes", "too expensive in dollars". Answer: approvals before action, local-currency pricing.</li>
+            <li><b>Where to reach them:</b> WhatsApp groups, trade associations, their accountant, Instagram and TikTok.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <p class="eyebrow">Highest value</p>
+          <h3>The growing professional firm</h3>
+          <ul>
+            <li><b>Who:</b> agency, consultancy, law or accounting practice, private clinic; 5–50 staff; Lagos, Dubai, Johannesburg or London.</li>
+            <li><b>Jobs to be done:</b> draft and review contracts, chase invoices, hire well, comply with data-privacy law (NDPR, POPIA, GDPR).</li>
+            <li><b>Triggers:</b> a large new client, an audit or privacy incident, the first HR hire.</li>
+            <li><b>Objections:</b> data security. Answer: data-protection controls, audit trail, DPA on Enterprise.</li>
+            <li><b>Where to reach them:</b> LinkedIn, professional bodies, partner referrals.</li>
+          </ul>
+        </div>
+        <div class="panel strong">
+          <p class="eyebrow">Fastest scale</p>
+          <h3>The SME enabler</h3>
+          <ul>
+            <li><b>Who:</b> accounting firms, bank SME desks, telco SME units, SME agencies and incubators.</li>
+            <li><b>Jobs to be done:</b> serve hundreds of small clients with few staff; reduce churn; hit digitisation targets.</li>
+            <li><b>Triggers:</b> a new SME product launch, a government or donor programme, client churn.</li>
+            <li><b>What they buy:</b> white-label workspaces, per-business bundles, a partner dashboard.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="panel"><h3>Secondary: franchises and multi-branch groups</h3><p>Pharmacy chains, restaurant groups and schools that need every branch run the same way. Enterprise contracts.</p></div>
+        <div class="panel"><h3>Secondary: diaspora-owned businesses</h3><p>African and Middle Eastern owners running SMEs in the UK and US: a natural bridge from our home markets to high-paying ones.</p></div>
+      </div>
+    </section>
+
+    <section id="payers" aria-labelledby="payers-h">
+      <h2 id="payers-h">Who will pay for Boterra</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Payer</th><th>Why they pay</th><th>Commercial model</th><th>Evidence they pay today</th></tr></thead>
+          <tbody>
+            <tr><td><b>SME owners</b></td><td>Replace part-time hires, agencies and missed deadlines</td><td>Free Starter → Growth $49 → Scale $149 per month; local-currency pricing</td><td>28% of US SMBs spend $25–99 a month on AI; 16% spend $100–249 (Bluevine)</td></tr>
+            <tr><td><b>Accountants and agencies</b></td><td>Serve more clients per staff member; new advisory revenue</td><td>White-label seats priced per client business</td><td>Agentic bookkeeping is moving into firms (Pilot AI Accountant, Feb 2026)</td></tr>
+            <tr><td><b>Banks, telcos, fintechs</b></td><td>Retain SME customers, grow deposits and usage</td><td>Bundled into SME accounts, priced per active business</td><td>du's agentic AI programme for 10,000 UAE SMEs</td></tr>
+            <tr><td><b>Governments and donors</b></td><td>SME productivity, jobs and formalisation</td><td>Sponsored seats for cohorts, with impact reporting</td><td>SMEDAN × Zoho: up to ₦20bn for 25,000 MSMEs; Bujeti × SMEDAN</td></tr>
+            <tr><td><b>Franchises and groups</b></td><td>Consistent operations across branches</td><td>Annual enterprise contract</td><td>To be proven in pilots</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="where" aria-labelledby="where-h">
+      <h2 id="where-h">Where Boterra will be used most</h2>
+      <h3>By industry (assessment)</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Industry</th><th>Admin and compliance load</th><th>Digital readiness</th><th>Ability to pay</th><th>Wave</th></tr></thead>
+          <tbody>
+            <tr><td>Professional services</td><td>High</td><td>High</td><td>High</td><td><span class="pill w1">Wave 1</span></td></tr>
+            <tr><td>Retail and e-commerce</td><td>High</td><td>High</td><td>Medium</td><td><span class="pill w1">Wave 1</span></td></tr>
+            <tr><td>Restaurants and hospitality</td><td>High</td><td>Medium</td><td>Medium</td><td><span class="pill w1">Wave 1</span></td></tr>
+            <tr><td>Clinics and wellness</td><td>Very high</td><td>Medium</td><td>High</td><td><span class="pill w2">Wave 2</span></td></tr>
+            <tr><td>Logistics and transport</td><td>High</td><td>Medium</td><td>Medium</td><td><span class="pill w2">Wave 2</span></td></tr>
+            <tr><td>Construction and trades</td><td>High</td><td>Low</td><td>Medium</td><td><span class="pill w2">Wave 2</span></td></tr>
+            <tr><td>Agribusiness and schools</td><td>High</td><td>Low</td><td>Low</td><td><span class="pill w3">Wave 3, via programmes</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>By region and country</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Market</th><th>Why</th><th>Main risk</th><th>Wave</th></tr></thead>
+          <tbody>
+            <tr><td><b>Nigeria</b> (Lagos, Abuja)</td><td>39.6M MSMEs; government already funds SME software; English-speaking; heavy compliance pain; no localised AI-workforce leader</td><td>Naira volatility and price sensitivity: price locally, sell through banks and telcos</td><td><span class="pill w1">Wave 1</span></td></tr>
+            <tr><td><b>Kenya and Ghana</b></td><td>National AI push for MSMEs; mobile-money native; strong startup ecosystems</td><td>Smaller ticket sizes</td><td><span class="pill w1">Wave 1b</span></td></tr>
+            <tr><td><b>UAE and Saudi Arabia</b></td><td>High willingness to pay; du programme for 10,000 SMEs; Monshaat and SDAIA support; Vision 2030 / AI Strategy 2031</td><td>Arabic product, data residency and local partners needed</td><td><span class="pill w2">Wave 2</span></td></tr>
+            <tr><td><b>South Africa</b></td><td>Larger formal SME base; POPIA creates compliance demand</td><td>Strong local accounting incumbents</td><td><span class="pill w2">Wave 2</span></td></tr>
+            <tr><td><b>UK, US and India</b></td><td>Largest spend (36.2M US small businesses); 88.4M registered Indian MSMEs</td><td>Crowded (Wix Symphony, Sintra); very low price points in India</td><td><span class="pill w3">Wave 3</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="competitors" aria-labelledby="comp-h">
+      <h2 id="comp-h">Similar solutions: who leads and why</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Company</th><th>Offer</th><th>Traction</th><th>Why it succeeds</th><th>Weakness</th></tr></thead>
+          <tbody>
+            <tr><td><b>Sintra</b> (Lithuania)</td><td>12 named AI helpers: social, support, data, copy, SEO</td><td class="num">$12M ARR · 40,000 paying · $17M seed (Jun 2025)</td><td>Viral weekend launch, simple personas, low price, integrations with Gmail, Meta and Google</td><td>Front office only; helpers work alone; no approvals or audit trail</td></tr>
+            <tr><td><b>Symphony by Wix</b></td><td>Multi-agent team run by a "Maestro" orchestrator; daily stand-ups; accuracy-checking agents</td><td>Launched 11 Aug 2026; free plan, paid ≈ $16–80/mo</td><td>Distribution to Wix's existing customers; proactive daily habit</td><td>Web and marketing centred; tied to the Wix ecosystem</td></tr>
+            <tr><td><b>Lindy</b></td><td>Configurable workflow agents</td><td class="num">$50M raised · 56 staff</td><td>Power-user flexibility; time-saving pitch</td><td>Needs setup skills most owners lack</td></tr>
+            <tr><td><b>Relevance AI</b></td><td>Self-serve agent builder with marketplace</td><td class="num">$24M Series A (2024)</td><td>Templates and marketplace for SMB and mid-market</td><td>A builder, not a ready-made team</td></tr>
+            <tr><td><b>Motion</b></td><td>AI employees inside a scheduling suite</td><td>Established productivity brand</td><td>Calendar and task automation</td><td>Productivity, not back-office</td></tr>
+            <tr><td><b>Agentforce, Copilot Studio</b></td><td>Enterprise agent platforms</td><td>Huge installed bases</td><td>Bundled with CRM and Microsoft 365</td><td>Complex and priced for larger firms</td></tr>
+            <tr><td><b>Vertical agents</b> (e.g. Pilot AI Accountant)</td><td>Deep automation of one function</td><td>Launched Feb 2026</td><td>Clear ROI in one job</td><td>Single department; another tool to manage</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid">
+        <div class="panel"><h3>What the leaders teach us</h3><ul><li>Named personas make AI easy to buy.</li><li>Distribution decides SMB software winners.</li><li>Free plans and credits remove risk.</li><li>A daily briefing creates the habit that retains.</li></ul></div>
+        <div class="panel"><h3>What the data says owners want</h3><ul><li>78% don't fully trust AI on tasks without oversight.</li><li>33% name data security as a barrier, up 10 points in a year.</li><li>Premiums go to AI built into tools they already use.</li><li>Lack of expertise is the top barrier to adoption.</li></ul></div>
+      </div>
+    </section>
+
+    <section id="opportunity" aria-labelledby="opp-h">
+      <h2 id="opp-h">Where the opportunity is</h2>
+      <div class="grid">
+        <div class="panel"><h3>1. The back office is empty</h3><p>Leaders cover marketing and support. Finance, tax, legal, compliance, HR and procurement have no SMB agent team. These are the jobs owners fear most and pay professionals for.</p></div>
+        <div class="panel"><h3>2. Trust is the buying criterion</h3><p>With most owners unwilling to let AI act unsupervised, approvals, risk ratings and an audit trail turn a weakness of the category into our feature.</p></div>
+        <div class="panel"><h3>3. Emerging markets are unserved</h3><p>Most of the world's 420–510M MSMEs are in emerging markets, yet leaders price in dollars, integrate with Western tools and ignore local rules and payment rails.</p></div>
+        <div class="panel"><h3>4. Intermediaries are ready to buy</h3><p>Governments, telcos and banks already fund SME software (SMEDAN × Zoho, du). A product they can bundle reaches thousands of SMEs per contract.</p></div>
+      </div>
+    </section>
+
+    <section id="positioning" aria-labelledby="pos-h">
+      <h2 id="pos-h">Positioning</h2>
+      <p class="statement">For owners of growing small businesses, Boterra AI is the governed AI workforce that runs every department, so they can scale without hiring a full back office. Unlike marketing-first AI helpers, Boterra plans across departments, asks before it acts, and knows local rules.</p>
+      <div class="grid">
+        <div class="panel"><h3>Category we own</h3><p>"Governed AI workforce": a whole team, with approvals and an audit trail.</p></div>
+        <div class="panel"><h3>For owners</h3><p>"Run your business like a company ten times your size."</p></div>
+        <div class="panel"><h3>For accountants and banks</h3><p>"Give every SME client a back office, under your brand."</p></div>
+        <div class="panel"><h3>For governments and donors</h3><p>"Measurable productivity for thousands of MSMEs per programme."</p></div>
+      </div>
+    </section>
+
+    <section id="leadership" aria-labelledby="lead-h">
+      <h2 id="lead-h">How Boterra becomes the market leader</h2>
+      <div class="grid">
+        <div class="panel"><h3>Own the category name</h3><p>Publish the "governed AI workforce" standard: autonomy levels, risk ratings, audit trail. Make competitors answer to it.</p></div>
+        <div class="panel"><h3>Win density before breadth</h3><p>Be the default in Lagos first: case studies, references and word of mouth in one city beat thin coverage of ten.</p></div>
+        <div class="panel"><h3>Build a partner moat</h3><p>Accountants, banks and telcos own SME relationships. Exclusive or early bundles lock in distribution that ad budgets can't buy.</p></div>
+        <div class="panel"><h3>Encode local rules</h3><p>Tax calendars, licences and privacy laws by country and industry, kept current. Every new country deepens the moat.</p></div>
+        <div class="panel"><h3>Ship industry packs fast</h3><p>Packs are data, so a new vertical ships in weeks. Aim for the widest pack library in the category.</p></div>
+        <div class="panel"><h3>Be where owners are</h3><p>WhatsApp-first agents, local languages (French, Swahili, Arabic), mobile-money billing.</p></div>
+      </div>
+    </section>
+
+    <section id="entry" aria-labelledby="entry-h">
+      <h2 id="entry-h">Entry strategy</h2>
+      <div class="timeline">
+        <div class="panel phase"><p class="eyebrow">Phase 1 · Months 0–6</p><h3>Beachhead: Lagos and Abuja</h3><ul><li>Wave 1 industries: restaurants, retail, professional services</li><li>30 accountant and agency partners</li><li>One bank or telco bundle pilot</li><li>Apply to SMEDAN and donor SME programmes</li><li>Naira pricing; WhatsApp onboarding</li></ul></div>
+        <div class="panel phase p2"><p class="eyebrow">Phase 2 · Months 6–18</p><h3>Africa, then a Gulf pilot</h3><ul><li>Kenya, Ghana, South Africa</li><li>Paystack, Flutterwave, M-Pesa, Zoho and QuickBooks integrations</li><li>UAE telco or free-zone pilot</li><li>Clinics, logistics and trades packs</li></ul></div>
+        <div class="panel phase p3"><p class="eyebrow">Phase 3 · Months 18–36</p><h3>Global, vertical-led</h3><ul><li>Saudi Arabia with an Arabic product</li><li>UK and US packs for clinics and trades</li><li>Diaspora-owned businesses</li><li>Franchise and enterprise contracts</li></ul></div>
+      </div>
+    </section>
+
+    <section id="gtm" aria-labelledby="gtm-h">
+      <h2 id="gtm-h">First 90 days: go-to-market plan</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Weeks</th><th>Goal</th><th>Actions</th><th>Success measure</th></tr></thead>
+          <tbody>
+            <tr><td class="num">1–2</td><td>Ready to sell</td><td>Naira pricing and Paystack billing; WhatsApp onboarding; 3 Wave 1 case-study scripts; partner deck</td><td>Pricing live; demo runs end to end</td></tr>
+            <tr><td class="num">3–4</td><td>Design partners</td><td>Recruit 20 founding businesses across the three Wave 1 industries; weekly check-ins</td><td>20 active workspaces; first missions completed</td></tr>
+            <tr><td class="num">5–8</td><td>Channel partners</td><td>Sign 10 accounting and agency firms; partner revenue share; co-hosted workshops</td><td>10 partners, each onboarding 5+ clients</td></tr>
+            <tr><td class="num">5–8</td><td>Institutional pilot</td><td>Pitch 3 banks or telcos and SMEDAN; propose a 500-business sponsored cohort</td><td>1 signed pilot letter</td></tr>
+            <tr><td class="num">9–12</td><td>Prove conversion</td><td>Trial-to-paid push; publish 5 case studies; launch the referral programme; short-video content</td><td>Trial to paid [__]%; weekly active missions per business</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid">
+        <div class="panel"><h3>North-star metric</h3><p>Missions completed per business per week: it measures real work delegated, not logins.</p></div>
+        <div class="panel"><h3>Targets to set from pilots</h3><ul><li>Trial to paid: [__]%</li><li>CAC payback under 6 months</li><li>Net revenue retention above 100%</li></ul></div>
+        <div class="panel"><h3>Benchmark</h3><p>Sintra earns about $25 per paying customer a month ($12M ARR ÷ 40,000 ÷ 12). At $30 blended, 10,000 businesses is $3.6M ARR. That path is illustrative, not a forecast.</p></div>
+      </div>
+    </section>
+
+    <section id="risks" aria-labelledby="risks-h">
+      <h2 id="risks-h">Risks and mitigations</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Risk</th><th>Mitigation</th></tr></thead>
+          <tbody>
+            <tr><td>Wix, Sintra or a big platform adds back-office agents</td><td>Move first in emerging markets; partner lock-in; local compliance depth they won't prioritise</td></tr>
+            <tr><td>Low willingness to pay and currency swings</td><td>Local pricing; bank, telco and government payers; credit packs; yearly plans</td></tr>
+            <tr><td>Wrong advice on tax, legal or compliance</td><td>Approvals before action; cite rules; professional sign-off prompts; partner accountant review</td></tr>
+            <tr><td>Data privacy (NDPR, POPIA, GDPR)</td><td>Data-protection controls, DPA, regional hosting on Enterprise, clear retention policies</td></tr>
+            <tr><td>Model costs eat margin</td><td>Credit metering; model routing by task; prompt caching</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="sources" aria-labelledby="sources-h">
+      <h2 id="sources-h">Sources</h2>
+      <ul class="list sources">
+        <li><a href="https://siliconangle.com/2026/08/11/wix-launches-symphony-new-standalone-multi-agent-system-built-business-operations/">SiliconANGLE: Wix launches Symphony (11 Aug 2026)</a></li>
+        <li><a href="https://www.wix.com/blog/which-ai-agent-platform-is-the-most-affordable-for-your-business">Wix blog: AI agent platform pricing</a></li>
+        <li><a href="https://tech.eu/2025/06/10/lithuanian-ai-startup-sintra-secures-17m-seed-empowering-smbs-with-ai-helpers/">Tech.eu: Sintra raises $17M seed ($12M ARR, 40,000 customers)</a></li>
+        <li><a href="https://sacra.com/c/lindy/">Sacra: Lindy</a> · <a href="https://tracxn.com/d/companies/lindy/__FJe0QVe6UcRHtdiPJpmyRG3livSd4eIGsIxMxz-kNPI">Tracxn: Lindy</a></li>
+        <li><a href="https://www.ringly.io/blog/ai-agent-statistics-2026">AI agent statistics 2026 (market size, Gartner spending)</a></li>
+        <li><a href="https://presenc.ai/research/smb-ai-adoption-statistics-2026">SMB AI adoption statistics 2026 (QuickBooks, OECD, US data)</a></li>
+        <li><a href="https://www.crowdfundinsider.com/2026/08/293262-artificial-intelligence-ai-delivers-significant-time-savings-for-smbs-yet-trust-remains-key-challenge-research/">Crowdfund Insider: SMB AI trust research (2026)</a> · <a href="https://stacker.com/stories/small-business/34-small-businesses-dont-trust-ai-basic-tasks">Stacker: Bluevine SMB AI survey</a></li>
+        <li><a href="https://advocacy.sba.gov/2025/page/18">SBA Office of Advocacy: 36.2M US small businesses</a></li>
+        <li><a href="https://knnindia.co.in/news/newsdetails/msme/over-884-crore-msmes-registered-on-udyam-platforms-mos-karandlaje">KNN India: 8.84 crore Udyam registrations</a></li>
+        <li><a href="https://techcabal.com/2022/07/22/the-msme-report-fuel-for-africas-next-billion-businesses-by-kippa/">TechCabal: Nigeria MSME report (SMEDAN/NBS 39.6M)</a></li>
+        <li><a href="https://msmeafricaonline.com/zoho-smedan-launch-n20bn-digital-support-programme-for-25000-nigerian-msmes/">MSME Africa: SMEDAN × Zoho ₦20bn programme</a></li>
+        <li><a href="https://gulfbusiness.com/en/2026/artificial-intelligence/10000-uae-smes-are-about-to-get-an-ai-upgrade-heres-what-du-business-is-planning/">Gulf Business: du agentic AI programme for 10,000 UAE SMEs</a></li>
+        <li><a href="https://capitalfm.africa/ai-to-drive-next-generation-of-kenyan-enterprises-says-ps-mangeni/">Capital FM: Kenya AI for MSMEs</a></li>
+        <li><a href="https://documents.worldbank.org/en/publication/documents-reports/documentdetail/819161468766822276/small-and-medium-enterprises-across-the-globe-a-new-database">World Bank: SMEs across the globe</a> · <a href="https://www.microsave.net/files/pdf/BN_168_MSMEs_Contribution_to_Local_and_National_Economy.pdf">MicroSave: MSME counts (IFC/McKinsey)</a></li>
+        <li><a href="https://beancount.io/blog/2026/08/12/agentic-ai-bookkeeping-platforms-2026-guide">Agentic bookkeeping platforms 2026 (Pilot AI Accountant)</a></li>
+      </ul>
+    </section>
+  </main>
+</div>
+
+<script>
+(function () {
+  var BRANCHES = [
+    { id: "product", label: "Product", color: "var(--accent)", leaves: ["26 specialist agents", "Atlas runs missions", "Routines & briefings", "Approval inbox", "Industry packs"] },
+    { id: "customers", label: "Customers", color: "var(--blue)", leaves: ["Owner-operators", "Professional firms", "Accountants & agencies", "Banks, telcos, fintechs", "Franchises"] },
+    { id: "markets", label: "Markets", color: "var(--rust)", leaves: ["Nigeria · wave 1", "Kenya & Ghana · 1b", "UAE & Saudi · 2", "South Africa · 2", "UK, US, India · 3"] },
+    { id: "gtm", label: "Go-to-market", color: "var(--teal)", leaves: ["Accountant partners", "Bank & telco bundles", "Government cohorts", "WhatsApp onboarding", "Short-video content"] },
+    { id: "moat", label: "Moat", color: "var(--red)", leaves: ["Governance by design", "Local compliance data", "Pack library", "Partner network", "Workflow data"] },
+    { id: "revenue", label: "Revenue", color: "var(--violet)", leaves: ["Free → $49 → $149", "Usage credits", "White-label seats", "Sponsored cohorts", "Enterprise contracts"] }
+  ];
+  var NS = "http://www.w3.org/2000/svg";
+  var svg = document.getElementById("mindmap");
+  var tools = document.getElementById("map-tools");
+  var outline = document.getElementById("map-outline");
+  var CX = 600, CY = 420;
+  var shown = {};
+
+  function el(name, attrs, parent) {
+    var node = document.createElementNS(NS, name);
+    for (var k in attrs) node.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(node);
+    return node;
+  }
+
+  var edgeLayer = el("g", {}, svg);
+  var nodeLayer = el("g", {}, svg);
+  var leafGroups = {};
+
+  BRANCHES.forEach(function (b, i) {
+    shown[b.id] = true;
+    // Two-sided tree: first three branches on the right, last three on the left.
+    var right = i < 3;
+    var bx = right ? 830 : 370, by = 170 + (i % 3) * 250;
+    var midX = (CX + bx) / 2;
+    el("path", { d: "M" + CX + "," + CY + " C" + midX + "," + CY + " " + midX + "," + by + " " + bx + "," + by, "class": "edge" }, edgeLayer);
+
+    var leafs = el("g", { "class": "leafs" }, edgeLayer);
+    leafGroups[b.id] = leafs;
+    var lx = right ? 990 : 210;
+    b.leaves.forEach(function (leaf, j) {
+      var ly = by + (j - (b.leaves.length - 1) / 2) * 34;
+      var cx1 = (bx + lx) / 2;
+      el("path", { d: "M" + bx + "," + by + " C" + cx1 + "," + by + " " + cx1 + "," + ly + " " + lx + "," + ly, "class": "edge" }, leafs);
+      el("circle", { cx: lx, cy: ly, r: 5, style: "fill:" + b.color, "class": "leaf-dot" }, leafs);
+      var t = el("text", { x: lx + (right ? 12 : -12), y: ly + 4, "text-anchor": right ? "start" : "end", "class": "leaf-text" }, leafs);
+      t.textContent = leaf;
+    });
+
+    var g = el("g", { "class": "branch", tabindex: "0", role: "button", "aria-label": b.label + ": show or hide detail" }, nodeLayer);
+    var w = Math.max(120, b.label.length * 10 + 36);
+    el("rect", { x: bx - w / 2, y: by - 20, width: w, height: 40, rx: 20, style: "fill:" + b.color }, g);
+    var bt = el("text", { x: bx, y: by + 5, "text-anchor": "middle", "class": "branch-text" }, g);
+    bt.textContent = b.label;
+    function toggle() { setShown(b.id, !shown[b.id]); }
+    g.addEventListener("click", toggle);
+    g.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
+
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.id = "map-toggle-" + b.id;
+    btn.textContent = b.label;
+    btn.setAttribute("aria-pressed", "true");
+    btn.addEventListener("click", toggle);
+    tools.appendChild(btn);
+
+    var col = document.createElement("div");
+    var h = document.createElement("h3");
+    h.textContent = b.label;
+    var ul = document.createElement("ul");
+    ul.className = "list";
+    b.leaves.forEach(function (leaf) { var li = document.createElement("li"); li.textContent = leaf; ul.appendChild(li); });
+    col.appendChild(h); col.appendChild(ul); outline.appendChild(col);
+  });
+
+  var center = el("g", {}, nodeLayer);
+  el("circle", { cx: CX, cy: CY, r: 78, fill: "#0B6B50" }, center);
+  var ct = el("text", { x: CX, y: CY - 2, "text-anchor": "middle", "class": "center-text" }, center);
+  ct.textContent = "Boterra AI";
+  var cs = el("text", { x: CX, y: CY + 20, "text-anchor": "middle", "class": "center-sub" }, center);
+  cs.textContent = "Governed AI workforce";
+
+  function setShown(id, value) {
+    shown[id] = value;
+    leafGroups[id].style.opacity = value ? "1" : "0";
+    leafGroups[id].style.visibility = value ? "visible" : "hidden";
+    var btn = document.getElementById("map-toggle-" + id);
+    if (btn) btn.setAttribute("aria-pressed", String(value));
+  }
+})();
+</script>
