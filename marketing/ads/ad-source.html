@@ -1,0 +1,156 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts/local.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0B1424; }
+  #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: "DM Sans", sans-serif; color: #F6F8F4;
+    background: radial-gradient(900px 700px at 20% 0%, #0F5E4A 0%, rgba(15,94,74,0) 70%), radial-gradient(700px 600px at 100% 100%, rgba(242,179,61,.18) 0%, rgba(242,179,61,0) 70%), #0B1424; }
+  .abs { position: absolute; will-change: transform, opacity; }
+  .head { font-family: "Sora", sans-serif; font-weight: 700; letter-spacing: -1px; text-align: center; width: 1080px; left: 0; }
+  .chip { padding: 22px 34px; border-radius: 999px; font-size: 44px; font-weight: 700; white-space: nowrap; }
+  .task { background: #1B2A44; border: 3px solid #2E4468; color: #F6F8F4; }
+  .dept { background: #13213A; border: 3px solid #34D3A6; color: #DDF4EA; font-size: 34px; padding: 16px 26px; }
+  .row { left: 110px; width: 860px; height: 128px; border-radius: 28px; background: #13213A; border: 2px solid #24375A; display: flex; align-items: center; gap: 28px; padding: 0 32px; }
+  .av { width: 76px; height: 76px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-family: "Sora"; font-weight: 700; font-size: 36px; }
+  .row .name { font-size: 40px; font-weight: 700; }
+  .row .task-t { font-size: 32px; color: #9FB4B0; }
+  .tick { margin-left: auto; width: 64px; height: 64px; border-radius: 50%; background: #34D3A6; color: #0B1424; font-size: 40px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+</style></head>
+<body><div id="stage">
+  <!-- Scene 1 -->
+  <div id="s1a" class="abs head" style="top:300px;font-size:104px;line-height:1.08">Running a business</div>
+  <div id="s1b" class="abs head" style="top:420px;font-size:150px;line-height:1.08;color:#F2B33D">alone?</div>
+  <div id="tasks"></div>
+
+  <!-- Scene 2 -->
+  <svg id="lines" class="abs" width="1080" height="1920" style="left:0;top:0"></svg>
+  <div id="s2a" class="abs head" style="top:250px;font-size:96px;line-height:1.1">Meet your<br><span style="color:#34D3A6">AI workforce.</span></div>
+  <div id="atlas" class="abs" style="left:390px;top:900px;width:300px;height:300px;border-radius:50%;background:linear-gradient(135deg,#34D3A6,#0B7A5C);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 120px rgba(52,211,166,.45)">
+    <div style="font-family:Sora;font-weight:700;font-size:60px;color:#0B1424">Atlas</div>
+    <div style="font-size:28px;font-weight:700;color:#0B1424">Chief of Staff</div>
+  </div>
+  <div id="depts"></div>
+  <div id="s2b" class="abs head" style="top:1640px;font-size:56px;font-family:'DM Sans';font-weight:700;color:#DDF4EA">26 agents · 10 departments</div>
+
+  <!-- Scene 3 -->
+  <div id="s3title" class="abs head" style="top:250px;font-size:84px;line-height:1.1">Give one goal.<br><span style="color:#34D3A6">The team does the work.</span></div>
+  <div id="mission" class="abs" style="left:110px;top:620px;width:860px;padding:30px 36px;border-radius:28px;background:#F6F8F4;color:#0B1424">
+    <div style="font-size:28px;font-weight:700;letter-spacing:3px;color:#0B7A5C">MISSION</div>
+    <div id="mtext" style="font-family:Sora;font-size:52px;font-weight:700;margin-top:8px;min-height:64px"></div>
+  </div>
+  <div id="r1" class="abs row" style="top:860px"><div class="av" style="background:#DDF4EA;color:#0B6B50">Q</div><div><div class="name">Quinn · CFO</div><div class="task-t">Cash-flow forecast</div></div><div class="tick">✓</div></div>
+  <div id="r2" class="abs row" style="top:1012px"><div class="av" style="background:#FBE1DE;color:#9B2B1F">S</div><div><div class="name">Sentinel · Compliance</div><div class="task-t">Licences checked</div></div><div class="tick">✓</div></div>
+  <div id="r3" class="abs row" style="top:1164px"><div class="av" style="background:#FCE9D9;color:#97440B">N</div><div><div class="name">Nova · Marketing</div><div class="task-t">Launch campaign ready</div></div><div class="tick">✓</div></div>
+  <div id="appr" class="abs" style="left:110px;top:1360px;width:860px;padding:30px 36px;border-radius:28px;background:rgba(242,179,61,.14);border:3px solid #F2B33D;display:flex;align-items:center;gap:24px">
+    <div style="flex:1"><div style="font-size:36px;font-weight:700;color:#F2B33D">Needs your approval</div><div style="font-size:30px;color:#DCE7E2">Sign supplier quote · high risk</div></div>
+    <div id="btn" style="padding:20px 34px;border-radius:999px;background:#F2B33D;color:#0B1424;font-size:36px;font-weight:700;white-space:nowrap">Approve</div>
+  </div>
+  <div id="cursor" class="abs" style="width:70px;height:70px;border-radius:50%;background:rgba(246,248,244,.85);border:4px solid #0B1424"></div>
+
+  <!-- Scene 4 -->
+  <div id="logo" class="abs" style="left:420px;top:560px;width:240px;height:240px;border-radius:64px;background:linear-gradient(135deg,#34D3A6,#04785E);box-shadow:0 0 140px rgba(52,211,166,.5)">
+    <svg viewBox="0 0 32 32" width="240" height="240"><circle cx="16" cy="16" r="4" fill="#fff"/><circle cx="8.5" cy="9" r="2.2" fill="#fff" opacity=".85"/><circle cx="23.5" cy="9" r="2.2" fill="#fff" opacity=".85"/><circle cx="8.5" cy="23" r="2.2" fill="#fff" opacity=".85"/><circle cx="23.5" cy="23" r="2.2" fill="#fbbf24"/><path d="M10 10.5 14 14M22 10.5 18 14M10 21.5 14 18M22 21.5 18 18" stroke="#fff" stroke-width="1.4" stroke-linecap="round" opacity=".7"/></svg>
+  </div>
+  <div id="brand" class="abs head" style="top:870px;font-size:130px">Boterra <span style="color:#34D3A6">AI</span></div>
+  <div id="tag" class="abs head" style="top:1060px;font-size:60px;font-family:'DM Sans';font-weight:500;line-height:1.25;color:#DCE7E2">The AI workforce that<br>runs your business.</div>
+  <div id="cta" class="abs" style="left:190px;top:1330px;width:700px;padding:36px 0;text-align:center;border-radius:999px;background:#34D3A6;color:#0B1424;font-size:52px;font-weight:700">Start free today</div>
+  <div id="sub" class="abs head" style="top:1490px;font-size:38px;font-family:'DM Sans';font-weight:500;color:#9FB4B0">14-day full trial · No card needed</div>
+</div>
+<script>
+const $ = (id) => document.getElementById(id);
+const clamp = (x) => Math.max(0, Math.min(1, x));
+const seg = (t, a, b) => clamp((t - a) / (b - a));
+const ease = (x) => 1 - Math.pow(1 - x, 3);
+const back = (x) => { const c = 1.7; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+function set(el, o, x = 0, y = 0, s = 1, extra = "") {
+  el.style.opacity = o; el.style.transform = `translate(${x}px,${y}px) scale(${s}) ${extra}`;
+  el.style.visibility = o <= 0.001 ? "hidden" : "visible";
+}
+
+const TASKS = [
+  ["Invoices", 80, 760, -8], ["Taxes", 620, 700, 6], ["Payroll", 300, 900, -4], ["Hiring", 700, 980, 9],
+  ["Licences", 90, 1110, 7], ["Marketing", 520, 1220, -6], ["Contracts", 150, 1390, -10], ["Customers", 600, 1450, 5],
+  ["Suppliers", 330, 1600, 3], ["Compliance", 60, 1760, -5],
+];
+const tasksEl = $("tasks");
+TASKS.forEach(([label, x, y, r]) => { const d = document.createElement("div"); d.className = "abs chip task"; d.textContent = label; d.style.left = x + "px"; d.style.top = y + "px"; d.dataset.r = r; tasksEl.appendChild(d); });
+
+const DEPTS = ["Finance", "Operations", "Sales", "Customer", "People & HR", "Legal", "Compliance", "Admin", "Technology", "Strategy"];
+const CX = 540, CY = 1050, RX = 400, RY = 470;
+const deptsEl = $("depts"), lines = $("lines");
+DEPTS.forEach((label, i) => {
+  const a = (-90 + i * 36) * Math.PI / 180;
+  const x = CX + RX * Math.cos(a), y = CY + RY * Math.sin(a);
+  const d = document.createElement("div"); d.className = "abs chip dept"; d.textContent = label; deptsEl.appendChild(d);
+  d.dataset.x = x; d.dataset.y = y;
+  const l = document.createElementNS("http://www.w3.org/2000/svg", "line");
+  l.setAttribute("x1", CX); l.setAttribute("y1", CY); l.setAttribute("x2", x); l.setAttribute("y2", y);
+  l.setAttribute("stroke", "#34D3A6"); l.setAttribute("stroke-width", "4"); l.setAttribute("stroke-opacity", ".45");
+  lines.appendChild(l);
+});
+const MISSION = "Open a second café by Q3";
+
+window.render = function (t) {
+  // Scene 1: 0 – 2.2s
+  const out1 = 1 - seg(t, 1.9, 2.2);
+  set($("s1a"), ease(seg(t, 0, 0.35)) * out1, 0, 40 * (1 - ease(seg(t, 0, 0.35))));
+  set($("s1b"), ease(seg(t, 0.25, 0.6)) * out1, 0, 0, 0.6 + 0.4 * back(seg(t, 0.25, 0.6)));
+  [...tasksEl.children].forEach((c, i) => {
+    const p = seg(t, 0.3 + i * 0.12, 0.55 + i * 0.12);
+    const shake = Math.sin(t * 22 + i) * 6 * seg(t, 1.2, 1.9);
+    set(c, Math.min(p * 1.5, 1) * out1, shake, -shake, (0.3 + 0.7 * back(p)) * (1 + 0.15 * seg(t, 1.9, 2.2)), `rotate(${c.dataset.r}deg)`);
+  });
+
+  // Scene 2: 2.2 – 4.6s
+  const out2 = 1 - seg(t, 4.4, 4.6);
+  set($("s2a"), ease(seg(t, 2.2, 2.55)) * out2, 0, 40 * (1 - ease(seg(t, 2.2, 2.55))));
+  const ap = seg(t, 2.35, 2.75);
+  set($("atlas"), Math.min(1, ap * 2) * out2, 0, 0, back(ap) * (1 + 0.03 * Math.sin(t * 5)));
+  [...deptsEl.children].forEach((c, i) => {
+    const p = ease(seg(t, 2.7 + i * 0.07, 3.15 + i * 0.07));
+    const x = CX + (c.dataset.x - CX) * p, y = CY + (c.dataset.y - CY) * p;
+    const w = c.offsetWidth, h = c.offsetHeight;
+    c.style.left = (x - w / 2) + "px"; c.style.top = (y - h / 2) + "px";
+    set(c, Math.min(1, p * 2) * out2, 0, 0, 0.5 + 0.5 * p);
+    const l = lines.children[i];
+    l.setAttribute("x2", x); l.setAttribute("y2", y); l.style.opacity = p * out2;
+  });
+  set($("s2b"), ease(seg(t, 3.6, 3.9)) * out2, 0, 30 * (1 - ease(seg(t, 3.6, 3.9))));
+
+  // Scene 3: 4.6 – 7.6s
+  const out3 = 1 - seg(t, 7.4, 7.6);
+  set($("s3title"), ease(seg(t, 4.6, 4.9)) * out3, 0, 40 * (1 - ease(seg(t, 4.6, 4.9))));
+  set($("mission"), ease(seg(t, 4.7, 4.95)) * out3, 0, 60 * (1 - ease(seg(t, 4.7, 4.95))));
+  $("mtext").textContent = MISSION.slice(0, Math.round(MISSION.length * seg(t, 4.85, 5.45)));
+  ["r1", "r2", "r3"].forEach((id, i) => {
+    const p = ease(seg(t, 5.5 + i * 0.3, 5.75 + i * 0.3));
+    set($(id), p * out3, 120 * (1 - p), 0);
+    const tick = $(id).querySelector(".tick"); const tp = seg(t, 5.8 + i * 0.3, 6.0 + i * 0.3);
+    tick.style.transform = `scale(${back(tp)})`; tick.style.opacity = tp;
+  });
+  set($("appr"), ease(seg(t, 6.45, 6.7)) * out3, 0, 60 * (1 - ease(seg(t, 6.45, 6.7))));
+  const press = seg(t, 7.0, 7.12);
+  const approved = t >= 7.12;
+  $("btn").textContent = approved ? "Approved ✓" : "Approve";
+  $("btn").style.background = approved ? "#34D3A6" : "#F2B33D";
+  $("btn").style.transform = `scale(${1 - 0.08 * Math.sin(press * Math.PI)})`;
+  const cp = ease(seg(t, 6.6, 7.0));
+  set($("cursor"), seg(t, 6.6, 6.75) * out3 * (1 - seg(t, 7.25, 7.4)), 0, 0, 1 - 0.15 * Math.sin(press * Math.PI));
+  $("cursor").style.left = (760 + 140 * (1 - cp)) + "px"; $("cursor").style.top = (1410 + 220 * (1 - cp)) + "px";
+
+  // Scene 4: 7.6 – 10s
+  const lp = seg(t, 7.6, 8.0);
+  set($("logo"), Math.min(1, lp * 2), 0, 0, back(lp), `rotate(${-90 * (1 - ease(lp))}deg)`);
+  set($("brand"), ease(seg(t, 7.85, 8.2)), 0, 40 * (1 - ease(seg(t, 7.85, 8.2))));
+  set($("tag"), ease(seg(t, 8.1, 8.45)), 0, 30 * (1 - ease(seg(t, 8.1, 8.45))));
+  const cpul = 1 + 0.035 * Math.sin((t - 8.6) * 7) * seg(t, 8.6, 8.8);
+  set($("cta"), ease(seg(t, 8.35, 8.65)), 0, 0, (0.7 + 0.3 * back(seg(t, 8.35, 8.65))) * cpul);
+  set($("sub"), ease(seg(t, 8.6, 8.9)), 0, 0);
+};
+
+// One-second bumper: the end card, assembled fast.
+window.renderBumper = function (t) { window.render(7.6 + Math.min(1, t / 0.75) * 1.4); };
+window.render(0);
+</script>
+</body></html>
