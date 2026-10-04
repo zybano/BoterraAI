@@ -1,0 +1,44 @@
+1
+00:00:00,400 --> 00:00:03,771
+Meet three business owners, in three different cities.
+
+2
+00:00:04,172 --> 00:00:09,271
+Amaka: I run a café in Lagos. Between suppliers, staff and taxes, I hardly sleep.
+
+3
+00:00:09,672 --> 00:00:15,133
+Kofi: My tailoring shop in Accra is growing. But chasing late payments takes all my time.
+
+4
+00:00:15,535 --> 00:00:20,975
+Wanjiru: In my pharmacy, one missed licence renewal could shut us down.
+
+5
+00:00:21,376 --> 00:00:26,304
+Then each of them hired a new team. An AI team. Boterra AI.
+
+6
+00:00:26,705 --> 00:00:30,908
+Amaka: Quinn forecasts my cash flow, and Vendor finds me better supplier deals.
+
+7
+00:00:31,309 --> 00:00:35,298
+Kofi: Tally sends my invoice reminders. I just approve, and I get paid.
+
+8
+00:00:35,699 --> 00:00:41,694
+Wanjiru: Sentinel tracks every licence and deadline. Now I sleep well.
+
+9
+00:00:42,096 --> 00:00:50,608
+Twenty-six AI agents, from finance to legal and compliance. Working together, with your approval on every big decision.
+
+10
+00:00:51,009 --> 00:00:54,870
+Three cities. Three businesses. One AI workforce.
+
+11
+00:00:55,271 --> 00:00:58,300
+Start free today, at www.boterra.io.
+
