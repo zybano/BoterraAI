@@ -1,0 +1,46 @@
+{
+ "total": 60.0,
+ "gap": 0.235,
+ "starts": [
+  0.35,
+  7.54,
+  10.506,
+  12.618,
+  16.757,
+  24.608,
+  30.858,
+  36.362,
+  42.314,
+  46.538,
+  49.738,
+  53.941
+ ],
+ "durs": [
+  6.955,
+  2.731,
+  1.877,
+  3.904,
+  7.616,
+  6.016,
+  5.269,
+  5.717,
+  3.989,
+  2.965,
+  3.968,
+  4.459
+ ],
+ "texts": [
+  "Running a business means doing ten jobs at once. Invoices. Taxes. Hiring. Licences. Marketing.",
+  "And somehow, you still have to serve your customers.",
+  "What if you had a whole team behind you?",
+  "Meet Boterra AI. The AI workforce that runs your business.",
+  "Twenty-six AI agents, across every department. Finance, operations, sales, HR, legal, and compliance.",
+  "Just give Atlas, your AI chief of staff, one goal. Like: open a second caf\u00e9 by Q3.",
+  "Quinn forecasts your cash flow. Sentinel checks your licences. Nova plans the launch.",
+  "And nothing risky happens without you. You approve every big decision, and every action is logged.",
+  "With industry packs for retail, restaurants, clinics, logistics, and more.",
+  "Run your business like a company ten times your size.",
+  "Start free today, with a fourteen-day full trial. No card needed.",
+  "Boterra AI. Visit w w w, dot boterra, dot I O."
+ ]
+}
