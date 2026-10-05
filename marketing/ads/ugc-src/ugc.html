@@ -1,0 +1,250 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../ad3/fonts/local.css">
+<link rel="stylesheet" href="../ad/fonts/local.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+  #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: "Nunito", sans-serif; }
+  .abs { position: absolute; }
+  #cam { position: absolute; inset: 0; transform-origin: 540px 900px; }
+  #room { position: absolute; inset: -80px; }
+  #gs { position: absolute; inset: 0; background: #0B1424; }
+  #card { position: absolute; left: 40px; top: 110px; width: 1000px; height: 1290px; border-radius: 44px; overflow: hidden; background: #F8FAFC; box-shadow: 0 30px 80px rgba(0,0,0,.45); }
+  #rec { position: absolute; left: 0; top: 0; width: 1000px; }
+  .cap { position: absolute; left: 60px; width: 960px; text-align: center; font-family: "Nunito"; font-weight: 800; font-size: 74px; line-height: 1.12; color: #fff; text-transform: uppercase; letter-spacing: 0; -webkit-text-stroke: 14px #0B0B0F; paint-order: stroke fill; }
+  .cap .hl { color: #FFE14D; }
+  .stk { position: absolute; padding: 18px 30px; border-radius: 30px; background: #fff; color: #15121F; font-weight: 800; font-size: 46px; white-space: nowrap; box-shadow: 0 10px 0 rgba(0,0,0,.22); }
+  .grain { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: overlay; opacity: .16; }
+</style></head>
+<body><div id="stage">
+  <div id="cam">
+    <!-- Selfie room -->
+    <svg id="room" width="1240" height="2080" viewBox="0 0 1240 2080">
+      <defs>
+        <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4E3D3"/><stop offset="1" stop-color="#E9CDB8"/></linearGradient>
+        <radialGradient id="ring" cx="85%" cy="12%" r="60%"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".75"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>
+        <linearGradient id="led" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B07CFF"/><stop offset="1" stop-color="#FF7AC6"/></linearGradient>
+      </defs>
+      <rect width="1240" height="2080" fill="url(#wall)"/>
+      <rect x="0" y="0" width="1240" height="40" fill="url(#led)" opacity=".85"/>
+      <rect x="0" y="40" width="1240" height="260" fill="url(#led)" opacity=".18"/>
+      <rect x="100" y="430" width="300" height="20" rx="8" fill="#B98B67"/>
+      <rect x="120" y="330" width="70" height="100" rx="10" fill="#7C5CFF"/><rect x="200" y="350" width="60" height="80" rx="10" fill="#FF8A4C"/><rect x="270" y="310" width="40" height="120" rx="10" fill="#22B07D"/>
+      <circle cx="350" cy="400" r="30" fill="#2E7D4F"/><rect x="335" y="400" width="30" height="30" rx="6" fill="#D9895B"/>
+      <rect x="860" y="380" width="230" height="290" rx="14" fill="#FFF8EE" stroke="#B98B67" stroke-width="12"/>
+      <circle cx="975" cy="490" r="60" fill="#FFB86B"/><path d="M890 640 L960 560 L1010 610 L1060 570 L1060 640 Z" fill="#7BC8A4"/>
+      <path d="M120 1300 C110 1100 150 950 210 880 C230 1000 260 1080 250 1300 Z" fill="#2E7D4F"/><path d="M200 1300 C230 1080 300 980 360 940 C340 1080 310 1180 300 1300 Z" fill="#3E9C63"/>
+      <rect x="130" y="1290" width="200" height="200" rx="30" fill="#D9895B"/>
+      <rect width="1240" height="2080" fill="url(#ring)"/>
+    </svg>
+    <div id="gs">
+      <div id="card"><img id="rec" src=""></div>
+      <div id="speed" class="abs stk" style="left:800px;top:140px;font-size:34px;padding:10px 20px;background:#15121F;color:#fff">⏩ 2x</div>
+    </div>
+    <div id="me" class="abs" style="left:-10px;top:520px;transform-origin:0 0"></div>
+  </div>
+  <canvas id="grain" class="grain" width="540" height="960" style="width:1080px;height:1920px"></canvas>
+  <div id="stickers"></div>
+  <div id="cap" class="cap"></div>
+  <!-- CTA + end card -->
+  <div id="cta" class="abs" style="left:110px;top:300px;width:860px;padding:36px 40px;border-radius:44px;background:#fff;box-shadow:0 14px 0 rgba(0,0,0,.25);text-align:center">
+    <div style="font-size:48px;font-weight:800;color:#15121F">Try it free 👇</div>
+    <div style="margin-top:18px;padding:22px 0;border-radius:999px;background:#0B7A5C;color:#fff;font-family:Sora;font-weight:700;font-size:70px">boterra.io</div>
+  </div>
+  <div id="end" class="abs" style="inset:0;background:radial-gradient(circle at 50% 35%, #12634F 0%, #0B1424 72%)">
+    <div id="e1" class="abs" style="left:420px;top:470px;width:240px;height:240px;border-radius:64px;background:linear-gradient(135deg,#34D3A6,#04785E);box-shadow:0 0 140px rgba(52,211,166,.5)"><svg viewBox="0 0 32 32" width="240" height="240"><circle cx="16" cy="16" r="4" fill="#fff"/><circle cx="8.5" cy="9" r="2.2" fill="#fff" opacity=".85"/><circle cx="23.5" cy="9" r="2.2" fill="#fff" opacity=".85"/><circle cx="8.5" cy="23" r="2.2" fill="#fff" opacity=".85"/><circle cx="23.5" cy="23" r="2.2" fill="#fbbf24"/><path d="M10 10.5 14 14M22 10.5 18 14M10 21.5 14 18M22 21.5 18 18" stroke="#fff" stroke-width="1.4" stroke-linecap="round" opacity=".7"/></svg></div>
+    <div class="abs" style="left:0;width:1080px;top:770px;text-align:center;font-family:Sora;font-weight:700;font-size:130px;color:#F6F8F4">Boterra <span style="color:#34D3A6">AI</span></div>
+    <div class="abs" style="left:110px;top:1000px;width:860px;padding:30px 0;text-align:center;border-radius:999px;background:#F2B33D;font-family:Sora;font-size:76px;font-weight:700;color:#0B1424">www.boterra.io</div>
+    <div class="abs" style="left:0;width:1080px;top:1190px;text-align:center;font-size:46px;font-weight:800;color:#BFD8D0">Free to start · 14-day full trial</div>
+    <div class="abs" style="left:0;width:1080px;top:1770px;text-align:center;font-size:30px;font-weight:700;color:#A7BAB5">AI-generated creator · Dramatization, results vary</div>
+  </div>
+</div>
+<script>
+const $ = (id) => document.getElementById(id);
+const clamp = (x) => Math.max(0, Math.min(1, x));
+const seg = (t, a, b) => clamp((t - a) / (b - a));
+const ease = (x) => 1 - Math.pow(1 - x, 3);
+const back = (x) => { const c = 1.9; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+
+// ---------- creator ----------
+const SKIN = "#6B4226", SHADE = "#57341C", LIPS = "#4A1E1A", HAIR = "#1E120C", HOOD = "#B9A6FF", HOOD2 = "#9F88F5";
+$("me").innerHTML = `<svg id="ife" viewBox="0 0 600 800" width="1100" height="1467" style="overflow:visible">
+  <g class="bob">
+    <circle cx="178" cy="178" r="96" fill="${HAIR}"/><circle cx="422" cy="178" r="96" fill="${HAIR}"/>
+    <circle cx="160" cy="150" r="30" fill="#2B1A12"/><circle cx="440" cy="150" r="30" fill="#2B1A12"/>
+    <path d="M40 800 C50 650 160 600 300 600 C440 600 550 650 560 800 Z" fill="${HOOD}"/>
+    <path d="M150 640 C170 560 240 540 300 548 C360 540 430 560 450 640 C400 610 350 600 300 604 C250 600 200 610 150 640 Z" fill="${HOOD2}"/>
+    <path d="M262 640 L250 760 M338 640 L350 760" stroke="#F4F1FF" stroke-width="10" stroke-linecap="round"/>
+    <rect x="240" y="752" width="20" height="30" rx="6" fill="#F4F1FF"/><rect x="340" y="752" width="20" height="30" rx="6" fill="#F4F1FF"/>
+    <rect x="254" y="470" width="92" height="140" rx="34" fill="${SHADE}"/>
+    <ellipse cx="176" cy="372" rx="24" ry="34" fill="${SHADE}"/><ellipse cx="424" cy="372" rx="24" ry="34" fill="${SHADE}"/>
+    <circle cx="172" cy="432" r="26" fill="none" stroke="#F2C14E" stroke-width="7"/><circle cx="428" cy="432" r="26" fill="none" stroke="#F2C14E" stroke-width="7"/>
+    <g class="headg">
+      <ellipse cx="300" cy="362" rx="128" ry="148" fill="${SKIN}"/>
+      <path d="M176 330 C168 232 238 206 300 206 C364 206 432 232 424 330 C404 286 362 268 300 268 C238 268 198 286 176 330 Z" fill="${HAIR}"/>
+      <rect x="414" y="372" width="18" height="34" rx="9" fill="#FFFFFF"/>
+      <g class="blush" opacity=".5"><ellipse cx="230" cy="428" rx="28" ry="15" fill="#E86A7E" opacity=".5"/><ellipse cx="370" cy="428" rx="28" ry="15" fill="#E86A7E" opacity=".5"/></g>
+      <g class="eyes">
+        <ellipse cx="250" cy="368" rx="15" ry="19" fill="#120A08"/><ellipse cx="350" cy="368" rx="15" ry="19" fill="#120A08"/>
+        <circle cx="255" cy="362" r="6" fill="none" stroke="#fff" stroke-width="2.5"/><circle cx="355" cy="362" r="6" fill="none" stroke="#fff" stroke-width="2.5"/>
+        <path d="M232 352 L226 344 M240 348 L236 339 M368 352 L374 344 M360 348 L364 339" stroke="#120A08" stroke-width="4" stroke-linecap="round"/>
+      </g>
+      <path class="browL" d="" stroke="${HAIR}" stroke-width="11" fill="none" stroke-linecap="round"/>
+      <path class="browR" d="" stroke="${HAIR}" stroke-width="11" fill="none" stroke-linecap="round"/>
+      <path d="M300 390 Q286 416 296 424 Q308 424 316 416" stroke="${SHADE}" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <path class="mouthLine" d="" stroke="${LIPS}" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <g class="mouthOpen"><ellipse cx="300" cy="456" rx="32" ry="8" fill="${LIPS}"/><rect class="teeth" x="280" y="446" width="40" height="8" rx="3" fill="#FFF"/></g>
+    </g>
+    <g class="hand" style="display:none">
+      <rect x="-40" y="40" width="110" height="150" rx="40" fill="${HOOD}"/>
+      <rect x="-30" y="-60" width="90" height="110" rx="34" fill="${SKIN}"/>
+      <rect class="f1" x="-26" y="-130" width="24" height="90" rx="12" fill="${SKIN}"/>
+      <rect class="f2" x="2" y="-140" width="24" height="96" rx="12" fill="${SKIN}"/>
+      <rect class="f3" x="30" y="-132" width="24" height="90" rx="12" fill="${SKIN}"/>
+      <rect class="f4" x="56" y="-112" width="20" height="74" rx="10" fill="${SKIN}"/>
+      <rect x="-52" y="-30" width="26" height="70" rx="13" fill="${SKIN}" transform="rotate(-30 -40 0)"/>
+    </g>
+  </g></svg>`;
+const ife = $("ife");
+function pose(t, { talk = 0, excite = 0, hand = null }) {
+  ife.querySelector(".bob").setAttribute("transform", `translate(0 ${(Math.sin(t * 2.4) * 5 + talk * 5).toFixed(1)})`);
+  ife.querySelector(".headg").setAttribute("transform", `rotate(${(Math.sin(t * 1.4) * 2.5 + talk * 4 * Math.sin(t * 8)).toFixed(2)} 300 430)`);
+  const bp = (t * 1.0) % 3.1, blink = bp < 0.11 ? 0.1 : 1;
+  const eyeS = blink * (1 + 0.15 * excite);
+  ife.querySelector(".eyes").setAttribute("transform", `translate(0 ${368 * (1 - eyeS)}) scale(1 ${eyeS})`);
+  const up = 12 * excite;
+  ife.querySelector(".browL").setAttribute("d", `M220 ${326 - up} Q248 ${306 - up} 274 ${320 - up}`);
+  ife.querySelector(".browR").setAttribute("d", `M326 ${320 - up} Q352 ${306 - up} 380 ${326 - up}`);
+  const ml = ife.querySelector(".mouthLine");
+  ml.setAttribute("d", `M262 440 Q300 ${478 + 8 * excite} 338 440`); ml.style.opacity = talk > 0.04 ? 0 : 1;
+  const mo = ife.querySelector(".mouthOpen"); mo.style.opacity = talk > 0.04 ? 1 : 0;
+  mo.querySelector("ellipse").setAttribute("ry", (6 + talk * 26 + excite * 4).toFixed(1));
+  mo.querySelector("ellipse").setAttribute("rx", (30 + excite * 6).toFixed(1));
+  const h = ife.querySelector(".hand");
+  if (!hand) { h.style.display = "none"; return; }
+  h.style.display = "";
+  if (hand === "wave") h.setAttribute("transform", `translate(520 700) rotate(${(Math.sin(t * 12) * 16).toFixed(1)} 20 80)`);
+  if (hand === "point") {
+    h.setAttribute("transform", `translate(520 690) rotate(${(-8 + Math.sin(t * 6) * 4).toFixed(1)} 20 80)`);
+    ["f1", "f3", "f4"].forEach(f => h.querySelector("." + f).setAttribute("height", 40));
+  } else ["f1", "f3", "f4"].forEach((f, i) => h.querySelector("." + f).setAttribute("height", [90, 90, 74][i]));
+  if (hand === "hype") h.setAttribute("transform", `translate(${500 + Math.sin(t * 9) * 10} 660) rotate(${(Math.sin(t * 9) * 10).toFixed(1)} 20 80)`);
+}
+
+// ---------- grain ----------
+const g = $("grain").getContext("2d"); const gimg = g.createImageData(540, 960);
+let seed = 1; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+function grain(frame) { seed = frame * 7919 + 1; for (let i = 0; i < gimg.data.length; i += 4) { const v = rnd() * 255; gimg.data[i] = gimg.data[i + 1] = gimg.data[i + 2] = v; gimg.data[i + 3] = 255; } g.putImageData(gimg, 0, 0); }
+
+// ---------- plan ----------
+// mode per line: "selfie" or "gs" (green screen with a recording)
+const MODE = ["selfie", "selfie", "selfie", "gs", "gs", "gs", "gs", "gs", "selfie", "selfie"];
+const CLIP = { 3: { c: "A", from: 0, speed: 1.93, delay: 0, pan: 0 }, 4: { c: "C", from: 0, to: 4.0, speed: 0.74, delay: 0, pan: 0 },
+  5: { c: "C", from: 4.0, speed: 1.0, delay: 0, pan: 0 }, 6: { c: "D", from: 0, speed: 1.0, delay: 2.2, pan: 0 }, 7: { c: "E", from: 0, speed: 0.75, delay: 0, pan: 180 } };
+const ZOOMS = [1.0, 1.12, 1.04, 1.0, 1.0, 1.0, 1.0, 1.0, 1.14, 1.06];
+// stickers: [line, offset, text, x, y, rot, style]
+const STK = [
+  [0, 0.15, "POV: AI gave me my weekends back 😭", 70, 230, -3, ""],
+  [1, 1.0, "📦 tiny online store", 120, 330, -4, ""],
+  [1, 3.4, "😩 10 hrs/week on admin", 330, 470, 3, "background:#FFE14D"],
+  [2, 1.0, "🤖 Boterra AI", 300, 300, -3, "background:#0B7A5C;color:#fff;font-size:58px"],
+  [2, 2.6, "a whole AI team 🔥", 360, 470, 4, ""],
+  [3, 3.3, "setup = 2 mins ⏱️", 520, 1180, -3, ""],
+  [3, 5.0, "💥 team built!", 120, 1010, 4, "background:#FFE14D"],
+  [4, 0.4, "just tell Atlas 💬", 460, 1180, 3, ""],
+  [5, 2.7, "Tally → invoices 💸", 70, 780, -3, "background:#DDF4EA"],
+  [5, 3.6, "Echo → socials 📱", 470, 900, 3, "background:#FFE3F1"],
+  [5, 5.1, "I touched nothing 🙌", 300, 1180, -2, "background:#FFE14D"],
+  [6, 3.3, "✅ one tap", 560, 600, 4, "background:#22B07D;color:#fff;font-size:58px"],
+  [7, 0.6, "📬 every Monday", 520, 1180, -3, ""],
+  [7, 3.4, "like a PA 🫶", 140, 1000, 3, "background:#FFE3F1"],
+  [8, 0.2, "8+ HRS/WEEK SAVED 🤯", 120, 300, -3, "background:#FFE14D;font-size:62px"],
+  [8, 2.3, "obsessed 😍", 560, 470, 5, ""],
+];
+const stEl = $("stickers");
+STK.forEach((s, i) => { const d = document.createElement("div"); d.className = "stk"; d.id = "stk" + i; d.textContent = s[2]; d.style.left = s[3] + "px"; d.style.top = s[4] + "px"; d.style.cssText += ";" + s[6]; stEl.appendChild(d); });
+// confetti particles
+const CONF = Array.from({ length: 60 }, (_, i) => { const d = document.createElement("div"); d.className = "abs"; d.style.width = "18px"; d.style.height = "30px"; d.style.borderRadius = "4px"; d.style.background = ["#FFE14D", "#34D3A6", "#FF7AC6", "#7C5CFF", "#FF8A4C"][i % 5]; stEl.appendChild(d); return { d, a: (i / 60) * Math.PI * 2 + i, v: 600 + (i * 137) % 700, r: (i * 47) % 360 }; });
+
+let wordsCache = {};
+function words(i) {
+  if (wordsCache[i]) return wordsCache[i];
+  const ws = window.TL.texts[i].replace("boterra dot I O", "boterra.io").split(" ");
+  const w = ws.map(x => x.length + 2), tot = w.reduce((a, b) => a + b, 0);
+  let acc = 0; const out = ws.map((x, k) => { const s = acc / tot; acc += w[k]; return { x, s }; });
+  return (wordsCache[i] = out);
+}
+
+window.render = async function (t, frame) {
+  const { starts: S, durs: D, env: ENV, total: TOTAL, rec: REC } = window.TL;
+  let li = 0; for (let i = 0; i < S.length; i++) if (t >= S[i] - 0.06) li = i;
+  const lt = t - S[li];
+  const talking = lt >= 0 && lt < D[li];
+  const k = Math.floor(lt * 30), e = ENV[li];
+  const talk = talking && k < e.length ? Math.min(1, e[k] * 1.25) : 0;
+  const mode = MODE[li];
+
+  // camera: jump-cut zoom + handheld shake
+  const z = ZOOMS[li] * (1 + 0.025 * seg(lt, 0, D[li]));
+  const sx = 5 * Math.sin(t * 1.3) + 2.5 * Math.sin(t * 3.7), sy = 4 * Math.sin(t * 1.7 + 1) + 2 * Math.sin(t * 4.3), rot = 0.35 * Math.sin(t * 0.9);
+  $("cam").style.transform = `translate(${sx}px, ${sy}px) rotate(${rot}deg) scale(${z})`;
+  $("room").style.display = mode === "selfie" ? "" : "none";
+  $("gs").style.display = mode === "gs" ? "" : "none";
+  const me = $("me");
+  if (mode === "selfie") { me.style.transform = "translate(0px,0px) scale(1)"; }
+  else { me.style.transform = "translate(-60px, 820px) scale(0.56)"; }
+
+  const excite = [[0, 0, 0.9], [2, 0, 0.6], [3, 4.6, 1], [8, 0, 1], [9, 0, 0.6]].reduce((m, [l, o, v]) => l === li && lt >= o ? v : m, 0.15);
+  const hand = li === 0 && lt < 1.6 ? "wave" : mode === "gs" ? "point" : li === 8 ? "hype" : null;
+  pose(t, { talk, excite, hand });
+
+  // recording clip
+  if (mode === "gs") {
+    const c = CLIP[li], frames = REC[c.c];
+    let ct = c.from + Math.max(0, lt - c.delay) * c.speed; if (c.to) ct = Math.min(ct, c.to);
+    let f = frames[0]; for (const x of frames) { if (x.t <= ct) f = x; else break; }
+    const img = $("rec");
+    if (img.dataset.src !== f.src) { img.dataset.src = f.src; img.src = f.src; await img.decode().catch(() => {}); }
+    img.style.transform = `translateY(${-c.pan}px)`;
+    const pin = ease(seg(lt, 0, 0.25));
+    $("card").style.transform = li === 3 || li === 6 ? `scale(${0.94 + 0.06 * pin})` : "none";
+    $("speed").style.display = li === 3 ? "" : "none";
+  }
+
+  // stickers
+  STK.forEach((s, i) => {
+    const el = $("stk" + i), a = S[s[0]] + s[1], endAt = s[0] + 1 < S.length ? S[s[0] + 1] - 0.05 : TOTAL;
+    const p = seg(t, a, a + 0.28), vis = t >= a && t < endAt;
+    el.style.display = vis ? "" : "none";
+    if (vis) el.style.transform = `rotate(${s[5] + Math.sin(t * 3 + i) * 1.5}deg) scale(${0.3 + 0.7 * back(p)})`;
+  });
+  // confetti on "8+ hours"
+  const ct0 = S[8] + 0.2, cp = t - ct0;
+  CONF.forEach(c => { const on = cp > 0 && cp < 2.6; c.d.style.display = on ? "" : "none"; if (on) { const x = 540 + Math.cos(c.a) * c.v * cp * 0.9, y = 520 + Math.sin(c.a) * c.v * cp * 0.7 + 900 * cp * cp; c.d.style.transform = `translate(${x}px,${y}px) rotate(${c.r + cp * 400}deg)`; } });
+
+  // captions: chunks of up to 3 words, current word highlighted
+  const cap = $("cap");
+  const ending = t >= S[9] + D[9] + 0.15;
+  if (talking && !ending) {
+    const ws = words(li), prog = clamp(lt / (D[li] * 0.96));
+    let cur = 0; ws.forEach((w, k) => { if (prog >= w.s) cur = k; });
+    const start = Math.floor(cur / 3) * 3, chunk = ws.slice(start, start + 3);
+    cap.innerHTML = chunk.map((w, k) => `<span class="${start + k === cur ? "hl" : ""}">${w.x}</span>`).join(" ");
+    cap.style.top = (mode === "selfie" ? 1610 : 1300) + "px";
+    cap.style.display = "";
+  } else cap.style.display = "none";
+
+  // CTA card on the last line, then the end card
+  const ctaP = seg(t, S[9] + 0.6, S[9] + 0.9);
+  $("cta").style.display = t >= S[9] + 0.6 && !ending ? "" : "none";
+  $("cta").style.transform = `rotate(-2deg) scale(${0.4 + 0.6 * back(ctaP)})`;
+  const endP = seg(t, S[9] + D[9] + 0.15, S[9] + D[9] + 0.5);
+  $("end").style.display = endP > 0 ? "" : "none";
+  $("end").style.clipPath = `circle(${endP * 1300}px at 540px 960px)`;
+  $("e1").style.transform = `scale(${back(seg(t, S[9] + D[9] + 0.3, S[9] + D[9] + 0.7))})`;
+
+  grain(frame);
+};
+</script>
+</body></html>

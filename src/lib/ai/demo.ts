@@ -38,12 +38,35 @@ ${steps.join("\n")}
 ${DEMO_NOTICE}`;
 }
 
+/** Keyword → agent routing so demo missions pick agents that fit the goal. */
+const KEYWORD_AGENTS: [RegExp, string][] = [
+  [/invoice|unpaid|payment|collect|overdue/i, "tally"],
+  [/social|post|instagram|tiktok|content/i, "echo"],
+  [/cash|forecast|budget|runway|loan/i, "quinn"],
+  [/tax|vat/i, "levy"],
+  [/book|reconcil|expense/i, "ledger"],
+  [/hire|hiring|staff|recruit/i, "harper"],
+  [/payroll|salar/i, "penny"],
+  [/contract|legal|nda/i, "lex"],
+  [/licen[cs]e|permit|complian|regulat/i, "sentinel"],
+  [/privacy|risk|data protection/i, "shield"],
+  [/supplier|vendor|procure/i, "vendor"],
+  [/stock|inventory/i, "stock"],
+  [/customer|support|complain/i, "haven"],
+  [/sales|lead|pipeline|client/i, "hunter"],
+  [/marketing|campaign|brand|launch/i, "nova"],
+  [/seo|google|search/i, "rank"],
+  [/process|sop|operation/i, "flow"],
+  [/strategy|grow|expan|location/i, "vision"],
+];
+
 export function demoPlan(goal: string, roster: Agent[]) {
-  const preferred = ["vision", "quinn", "nova", "flow", "sentinel", "hunter", "ledger", "haven"];
+  const matched = KEYWORD_AGENTS.filter(([re]) => re.test(goal)).map(([, id]) => id);
+  const preferred = [...new Set([...matched, "vision", "quinn", "nova", "flow", "sentinel"])];
   const picked = preferred
     .map((id) => roster.find((a) => a.id === id))
     .filter((a): a is Agent => !!a)
-    .slice(0, 3);
+    .slice(0, Math.max(3, Math.min(matched.length, 4)));
   const agents = picked.length ? picked : roster.filter((a) => a.id !== "atlas").slice(0, 3);
   return {
     plan: `To deliver “${topic(goal)}”, I'm splitting the work across ${agents.map((a) => a.name).join(", ")} so each department contributes in parallel.`,
