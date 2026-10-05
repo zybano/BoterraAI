@@ -1,0 +1,33 @@
+:root {
+  --bt-navy: #0A1230;
+  --bt-blue: #2B5CFF;
+  --bt-teal: #14E0C0;
+  --bt-tealDeep: #0B8F7B;
+  --bt-tealInk: #087A69;
+  --bt-violet: #7B5CFF;
+  --bt-violetInk: #5B3DF5;
+  --bt-cyan: #3BD8FF;
+  --bt-graphite: #151C36;
+  --bt-charcoal: #2A3352;
+  --bt-slate: #5E6A85;
+  --bt-silver: #B9C1D3;
+  --bt-mist: #E7EBF3;
+  --bt-paper: #F7F9FC;
+  --bt-success: #19C37D;
+  --bt-warning: #F5B53D;
+  --bt-danger: #F0525A;
+  --bt-grad-aurora: linear-gradient(135deg, #2B5CFF 0%, #7B5CFF 55%, #14E0C0 100%);
+  --bt-grad-nightfall: radial-gradient(120% 90% at 15% 0%, #1A2A7A 0%, #0A1230 60%);
+  --bt-grad-glass: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  --bt-font-display: Sora, 'Segoe UI', Arial, sans-serif;
+  --bt-font-body: Manrope, 'Segoe UI', Arial, sans-serif;
+  --bt-font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --bt-radius-sm: 8px;
+  --bt-radius-md: 12px;
+  --bt-radius-lg: 20px;
+  --bt-radius-xl: 28px;
+  --bt-radius-pill: 999px;
+  --bt-ease-fast: 120ms cubic-bezier(.2,.8,.2,1);
+  --bt-ease-base: 240ms cubic-bezier(.2,.8,.2,1);
+  --bt-ease-slow: 480ms cubic-bezier(.16,1,.3,1);
+}

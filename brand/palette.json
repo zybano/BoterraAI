@@ -1,0 +1,336 @@
+[
+ {
+  "name": "Midnight Navy",
+  "token": "navy",
+  "hex": "#0A1230",
+  "rgb": [
+   10,
+   18,
+   48
+  ],
+  "cmyk": [
+   79,
+   63,
+   0,
+   81
+  ],
+  "role": "Primary",
+  "onNavy": 1.0,
+  "onPaper": 17.43,
+  "onWhite": 18.39
+ },
+ {
+  "name": "Signal Blue",
+  "token": "blue",
+  "hex": "#2B5CFF",
+  "rgb": [
+   43,
+   92,
+   255
+  ],
+  "cmyk": [
+   83,
+   64,
+   0,
+   0
+  ],
+  "role": "Primary",
+  "onNavy": 3.57,
+  "onPaper": 4.88,
+  "onWhite": 5.15
+ },
+ {
+  "name": "Pulse Teal",
+  "token": "teal",
+  "hex": "#14E0C0",
+  "rgb": [
+   20,
+   224,
+   192
+  ],
+  "cmyk": [
+   91,
+   0,
+   14,
+   12
+  ],
+  "role": "Accent",
+  "onNavy": 10.9,
+  "onPaper": 1.6,
+  "onWhite": 1.69
+ },
+ {
+  "name": "Teal Deep",
+  "token": "tealDeep",
+  "hex": "#0B8F7B",
+  "rgb": [
+   11,
+   143,
+   123
+  ],
+  "cmyk": [
+   92,
+   0,
+   14,
+   44
+  ],
+  "role": "Accent (on light)",
+  "onNavy": 4.58,
+  "onPaper": 3.81,
+  "onWhite": 4.02
+ },
+ {
+  "name": "Teal Ink",
+  "token": "tealInk",
+  "hex": "#087A69",
+  "rgb": [
+   8,
+   122,
+   105
+  ],
+  "cmyk": [
+   93,
+   0,
+   14,
+   52
+  ],
+  "role": "Text accent on light"
+ },
+ {
+  "name": "Electric Violet",
+  "token": "violet",
+  "hex": "#7B5CFF",
+  "rgb": [
+   123,
+   92,
+   255
+  ],
+  "cmyk": [
+   52,
+   64,
+   0,
+   0
+  ],
+  "role": "Accent",
+  "onNavy": 4.22,
+  "onPaper": 4.13,
+  "onWhite": 4.36
+ },
+ {
+  "name": "Violet Ink",
+  "token": "violetInk",
+  "hex": "#5B3DF5",
+  "rgb": [
+   91,
+   61,
+   245
+  ],
+  "cmyk": [
+   63,
+   75,
+   0,
+   4
+  ],
+  "role": "Links on light"
+ },
+ {
+  "name": "Neon Cyan",
+  "token": "cyan",
+  "hex": "#3BD8FF",
+  "rgb": [
+   59,
+   216,
+   255
+  ],
+  "cmyk": [
+   77,
+   15,
+   0,
+   0
+  ],
+  "role": "Accent",
+  "onNavy": 10.9,
+  "onPaper": 1.6,
+  "onWhite": 1.69
+ },
+ {
+  "name": "Graphite",
+  "token": "graphite",
+  "hex": "#151C36",
+  "rgb": [
+   21,
+   28,
+   54
+  ],
+  "cmyk": [
+   61,
+   48,
+   0,
+   79
+  ],
+  "role": "Neutral",
+  "onNavy": 1.1,
+  "onPaper": 15.91,
+  "onWhite": 16.78
+ },
+ {
+  "name": "Charcoal",
+  "token": "charcoal",
+  "hex": "#2A3352",
+  "rgb": [
+   42,
+   51,
+   82
+  ],
+  "cmyk": [
+   49,
+   38,
+   0,
+   68
+  ],
+  "role": "Neutral",
+  "onNavy": 1.48,
+  "onPaper": 11.75,
+  "onWhite": 12.4
+ },
+ {
+  "name": "Slate",
+  "token": "slate",
+  "hex": "#5E6A85",
+  "rgb": [
+   94,
+   106,
+   133
+  ],
+  "cmyk": [
+   29,
+   20,
+   0,
+   48
+  ],
+  "role": "Neutral",
+  "onNavy": 3.39,
+  "onPaper": 5.14,
+  "onWhite": 5.42
+ },
+ {
+  "name": "Silver",
+  "token": "silver",
+  "hex": "#B9C1D3",
+  "rgb": [
+   185,
+   193,
+   211
+  ],
+  "cmyk": [
+   12,
+   9,
+   0,
+   17
+  ],
+  "role": "Neutral",
+  "onNavy": 10.18,
+  "onPaper": 1.71,
+  "onWhite": 1.81
+ },
+ {
+  "name": "Mist",
+  "token": "mist",
+  "hex": "#E7EBF3",
+  "rgb": [
+   231,
+   235,
+   243
+  ],
+  "cmyk": [
+   5,
+   3,
+   0,
+   5
+  ],
+  "role": "Neutral",
+  "onNavy": 15.39,
+  "onPaper": 1.13,
+  "onWhite": 1.19
+ },
+ {
+  "name": "Paper",
+  "token": "paper",
+  "hex": "#F7F9FC",
+  "rgb": [
+   247,
+   249,
+   252
+  ],
+  "cmyk": [
+   2,
+   1,
+   0,
+   1
+  ],
+  "role": "Neutral",
+  "onNavy": 17.43,
+  "onPaper": 1.0,
+  "onWhite": 1.05
+ },
+ {
+  "name": "Success",
+  "token": "success",
+  "hex": "#19C37D",
+  "rgb": [
+   25,
+   195,
+   125
+  ],
+  "cmyk": [
+   87,
+   0,
+   36,
+   24
+  ],
+  "role": "Semantic",
+  "onNavy": 8.01,
+  "onPaper": 2.18,
+  "onWhite": 2.3
+ },
+ {
+  "name": "Warning",
+  "token": "warning",
+  "hex": "#F5B53D",
+  "rgb": [
+   245,
+   181,
+   61
+  ],
+  "cmyk": [
+   0,
+   26,
+   75,
+   4
+  ],
+  "role": "Semantic",
+  "onNavy": 10.12,
+  "onPaper": 1.72,
+  "onWhite": 1.82
+ },
+ {
+  "name": "Danger",
+  "token": "danger",
+  "hex": "#F0525A",
+  "rgb": [
+   240,
+   82,
+   90
+  ],
+  "cmyk": [
+   0,
+   66,
+   62,
+   6
+  ],
+  "role": "Semantic",
+  "onNavy": 5.31,
+  "onPaper": 3.29,
+  "onWhite": 3.47
+ }
+]

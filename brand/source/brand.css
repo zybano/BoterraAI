@@ -1,0 +1,20 @@
+@import url("fonts/local.css");
+@import url("out/tokens.css");
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--bt-font-body); color: #E9EDF6; -webkit-font-smoothing: antialiased; }
+.dark { background: var(--bt-navy); color: #E9EDF6; --fg: #F2F5FB; --muted: #9AA5BF; --line: rgba(185,193,211,.14); --card: rgba(255,255,255,.04); --accentText: var(--bt-teal); }
+.light { background: var(--bt-paper); color: #1B2340; --fg: #0A1230; --muted: #5E6A85; --line: rgba(10,18,48,.10); --card: #FFFFFF; --accentText: var(--bt-tealInk); }
+.display { font-family: var(--bt-font-display); font-weight: 600; letter-spacing: -0.03em; color: var(--fg); }
+.label { font-family: var(--bt-font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.grad-text { background: var(--bt-grad-aurora); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; }
+.dark .card { backdrop-filter: blur(12px); box-shadow: 0 1px 0 rgba(255,255,255,.05) inset, 0 24px 60px -30px rgba(2,6,24,.8); }
+.light .card { box-shadow: 0 1px 2px rgba(10,18,48,.04), 0 20px 40px -24px rgba(10,18,48,.18); }
+.btn { display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 24px; border-radius: 14px; font-family: var(--bt-font-display); font-weight: 600; font-size: 16px; letter-spacing: -0.01em; white-space: nowrap; }
+.btn-primary { background: var(--bt-blue); color: #fff; box-shadow: 0 0 0 1px rgba(255,255,255,.12) inset, 0 12px 30px -10px rgba(43,92,255,.8); }
+.btn-ghost { border: 1px solid var(--line); color: var(--fg); }
+.pill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; border: 1px solid var(--line); color: var(--fg); }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--bt-teal); box-shadow: 0 0 0 4px rgba(20,224,192,.18); }
+.grid-bg-dark { background-image: url(out/patterns/grid-dark.svg); }
+.grid-bg-light { background-image: url(out/patterns/grid-light.svg); }
+.mono { font-family: var(--bt-font-mono); }
